@@ -12,7 +12,9 @@ import org.opencv.android.CameraBridgeViewBase;
 import org.opencv.android.JavaCameraView;
 
 import org.opencv.android.OpenCVLoader;
+import org.opencv.core.Core;
 import org.opencv.core.Mat;
+import org.opencv.core.Scalar;
 import org.opencv.core.Size;
 import org.opencv.imgproc.Imgproc;
 
@@ -20,8 +22,9 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
 
     private static final String TAG = "mainActivity";
     private JavaCameraView mCameraView;
-    private Mat blurredImage;
+    private Mat hsvMat;
     private Mat imgMat;
+    private Mat resultMat;
 
 
     @Override
@@ -35,9 +38,11 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
         mCameraView = new JavaCameraView(this, CameraBridgeViewBase.CAMERA_ID_ANY);
         mCameraView.enableFpsMeter();
         mCameraView.enableView();
+        mCameraView.setMaxFrameSize(800,640);
 
         setContentView(mCameraView);
         mCameraView.setCvCameraViewListener(this);
+
 
 
 
@@ -62,8 +67,9 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
 
     @Override
     public void onCameraViewStarted(int width, int height) {
-        blurredImage = new Mat();
+        hsvMat = new Mat();
         imgMat = new Mat();
+        resultMat = new Mat();
     }
 
     @Override
@@ -71,12 +77,18 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
         //Do calculations on frame...
         imgMat = frame.rgba();
 
-        Imgproc.blur(imgMat,blurredImage,new Size(7,7));
-        //Imgproc.cvtColor();   //convert colormode
-        //...
-        //Imgproc.findContours();
+        //Imgproc.blur(imgMat,hsvMat,new Size(7,7));  //TODO Ha kvar?
+        Imgproc.cvtColor(imgMat,hsvMat, Imgproc.COLOR_RGB2HSV);   //RGB -> HSV
 
-        return blurredImage;
+        //...
+        Core.inRange(hsvMat, new Scalar(0, 100, 100), new Scalar(10, 255, 255), resultMat);
+        //Imgproc.blur(resultMat,resultMat,new Size(10,10));
+        //Imgproc.medianBlur(resultMat, resultMat, 3);
+
+
+        //Imgproc.findContours(...);
+
+        return resultMat;
     }
 
     @Override
