@@ -1,12 +1,20 @@
 package com.example.ludvig.opencvtest;
 
 import android.content.pm.ActivityInfo;
+import android.graphics.Color;
 import android.graphics.Path;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutCompat;
+import android.util.AttributeSet;
 import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+
+
+import android.widget.LinearLayout;
 
 import org.opencv.android.CameraBridgeViewBase;
 import org.opencv.android.JavaCameraView;
@@ -26,7 +34,6 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
     private Mat imgMat;
     private Mat resultMat;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,8 +46,13 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
         mCameraView.enableFpsMeter();
         mCameraView.enableView();
         mCameraView.setMaxFrameSize(800,640);
+        //mCameraView.setMinimumHeight();
 
-        setContentView(mCameraView);
+        LinearLayout ll = new LinearLayout(this);
+        ll.addView(mCameraView, new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.MATCH_PARENT));
+
+        setContentView(ll);
         mCameraView.setCvCameraViewListener(this);
 
 
@@ -81,12 +93,13 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
         Imgproc.cvtColor(imgMat,hsvMat, Imgproc.COLOR_RGB2HSV);   //RGB -> HSV
 
         //...
-        Core.inRange(hsvMat, new Scalar(0, 100, 100), new Scalar(10, 255, 255), resultMat);
+        Core.inRange(hsvMat, new Scalar(12, 180, 80), new Scalar(55, 255, 255), resultMat);
         //Imgproc.blur(resultMat,resultMat,new Size(10,10));
         //Imgproc.medianBlur(resultMat, resultMat, 3);
 
 
         //Imgproc.findContours(...);
+        //Imgproc.drawContours(...);
 
         return resultMat;
     }
