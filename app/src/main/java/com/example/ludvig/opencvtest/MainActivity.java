@@ -14,6 +14,7 @@ import android.view.Window;
 import android.view.WindowManager;
 
 
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
 import org.opencv.android.CameraBridgeViewBase;
@@ -33,6 +34,9 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
     private Mat hsvMat;
     private Mat imgMat;
     private Mat resultMat;
+    private int hValue;
+    private int sValue;
+    private int vValue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,13 +50,15 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
         mCameraView.enableFpsMeter();
         mCameraView.enableView();
         mCameraView.setMaxFrameSize(800,640);
-        //mCameraView.setMinimumHeight();
 
-        LinearLayout ll = new LinearLayout(this);
-        ll.addView(mCameraView, new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.MATCH_PARENT));
 
-        setContentView(ll);
+        setContentView(R.layout.activity_main);
+
+        LinearLayout fl = (LinearLayout) findViewById(R.id.Cameraframe);
+        fl.addView(mCameraView,new LinearLayoutCompat.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT));
+
+
+
         mCameraView.setCvCameraViewListener(this);
 
 
