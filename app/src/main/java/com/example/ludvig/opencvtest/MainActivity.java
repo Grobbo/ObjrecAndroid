@@ -16,6 +16,7 @@ import android.view.WindowManager;
 
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.SeekBar;
 
 import org.opencv.android.CameraBridgeViewBase;
 import org.opencv.android.JavaCameraView;
@@ -37,6 +38,9 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
     private int hValue;
     private int sValue;
     private int vValue;
+    private SeekBar h_bar;
+    private SeekBar s_bar;
+    private SeekBar v_bar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,23 +49,72 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
         OpenCVInit();
         //setContentView(R.layout.activity_main);
 
-
         mCameraView = new JavaCameraView(this, CameraBridgeViewBase.CAMERA_ID_ANY);
         mCameraView.enableFpsMeter();
         mCameraView.enableView();
         mCameraView.setMaxFrameSize(800,640);
-
 
         setContentView(R.layout.activity_main);
 
         LinearLayout fl = (LinearLayout) findViewById(R.id.Cameraframe);
         fl.addView(mCameraView,new LinearLayoutCompat.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT));
 
-
-
         mCameraView.setCvCameraViewListener(this);
 
 
+        SeekBar h_bar = (SeekBar) findViewById(R.id.h_bar);
+        h_bar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                hValue = seekBar.getProgress();
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
+        SeekBar s_bar = (SeekBar) findViewById(R.id.s_bar);
+        h_bar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                sValue = seekBar.getProgress();
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
+        SeekBar v_bar = (SeekBar) findViewById(R.id.v_bar);
+        h_bar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                vValue = seekBar.getProgress();
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
 
 
     }
@@ -99,7 +152,7 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
         Imgproc.cvtColor(imgMat,hsvMat, Imgproc.COLOR_RGB2HSV);   //RGB -> HSV
 
         //...
-        Core.inRange(hsvMat, new Scalar(12, 180, 80), new Scalar(55, 255, 255), resultMat);
+        Core.inRange(hsvMat, new Scalar(hValue, sValue, vValue), new Scalar(55, 255, 255), resultMat); //new Scalar(12, 180, 80)
         //Imgproc.blur(resultMat,resultMat,new Size(10,10));
         //Imgproc.medianBlur(resultMat, resultMat, 3);
 
