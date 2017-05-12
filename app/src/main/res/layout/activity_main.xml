@@ -24,8 +24,8 @@
 
         <LinearLayout
             android:id="@+id/MenuLayout"
-            android:layout_width="252dp"
-            android:layout_height="132dp"
+            android:layout_width="300dp"
+            android:layout_height="match_parent"
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentTop="true"
@@ -43,8 +43,9 @@
 
             <LinearLayout
                 android:id="@+id/menu"
-                android:layout_width="match_parent"
+                android:layout_width="300dp"
                 android:layout_height="match_parent"
+                android:layout_weight="1.21"
                 android:orientation="vertical"
                 android:visibility="visible">
 
@@ -54,13 +55,27 @@
                     android:layout_height="wrap_content"
                     android:text="Hue Upper bound" />
 
-                <SeekBar
-                    android:id="@+id/hh_bar"
-                    style="@style/Widget.AppCompat.SeekBar.Discrete"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="25dp"
-                    android:alpha="1"
-                    android:max="255" />
+                    android:layout_height="20dp"
+                    android:orientation="horizontal">
+
+                    <SeekBar
+                        android:id="@+id/hh_bar"
+                        style="@style/Widget.AppCompat.SeekBar.Discrete"
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:layout_weight="1"
+                        android:alpha="1"
+                        android:max="255" />
+
+                    <TextView
+                        android:id="@+id/hh_value"
+                        android:layout_width="100dp"
+                        android:layout_height="20dp"
+                        android:layout_weight="1"
+                        android:text="0" />
+                </LinearLayout>
 
                 <TextView
                     android:id="@+id/textView2"
@@ -68,13 +83,27 @@
                     android:layout_height="wrap_content"
                     android:text="Saturation upper bound" />
 
-                <SeekBar
-                    android:id="@+id/hs_bar"
-                    style="@style/Widget.AppCompat.SeekBar.Discrete"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="25dp"
-                    android:alpha="1"
-                    android:max="255" />
+                    android:layout_height="20dp"
+                    android:orientation="horizontal">
+
+                    <SeekBar
+                        android:id="@+id/hs_bar"
+                        style="@style/Widget.AppCompat.SeekBar.Discrete"
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:layout_weight="1"
+                        android:alpha="1"
+                        android:max="255" />
+
+                    <TextView
+                        android:id="@+id/hs_value"
+                        android:layout_width="100dp"
+                        android:layout_height="20dp"
+                        android:layout_weight="1"
+                        android:text="0" />
+                </LinearLayout>
 
                 <TextView
                     android:id="@+id/textView3"
@@ -82,13 +111,28 @@
                     android:layout_height="wrap_content"
                     android:text="Value upper bound" />
 
-                <SeekBar
-                    android:id="@+id/hv_bar"
-                    style="@style/Widget.AppCompat.SeekBar.Discrete"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="25dp"
-                    android:alpha="1"
-                    android:max="255" />
+                    android:layout_height="20dp"
+                    android:orientation="horizontal">
+
+                    <SeekBar
+                        android:id="@+id/hv_bar"
+                        style="@style/Widget.AppCompat.SeekBar.Discrete"
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:layout_weight="1"
+                        android:alpha="1"
+                        android:max="255" />
+
+                    <TextView
+                        android:id="@+id/hv_value"
+                        android:layout_width="100dp"
+                        android:layout_height="20dp"
+                        android:layout_weight="1"
+                        android:text="0" />
+
+                </LinearLayout>
 
                 <TextView
                     android:id="@+id/textView4"
@@ -96,13 +140,27 @@
                     android:layout_height="wrap_content"
                     android:text="Hue lower bound" />
 
-                <SeekBar
-                    android:id="@+id/lh_bar"
-                    style="@style/Widget.AppCompat.SeekBar.Discrete"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="25dp"
-                    android:alpha="1"
-                    android:max="255" />
+                    android:layout_height="20dp"
+                    android:orientation="horizontal">
+
+                    <SeekBar
+                        android:id="@+id/lh_bar"
+                        style="@style/Widget.AppCompat.SeekBar.Discrete"
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:layout_weight="1"
+                        android:alpha="1"
+                        android:max="255" />
+
+                    <TextView
+                        android:id="@+id/lh_value"
+                        android:layout_width="100dp"
+                        android:layout_height="25dp"
+                        android:layout_weight="1"
+                        android:text="0" />
+                </LinearLayout>
 
                 <TextView
                     android:id="@+id/textView5"
@@ -110,13 +168,27 @@
                     android:layout_height="wrap_content"
                     android:text="Saturation lower bound" />
 
-                <SeekBar
-                    android:id="@+id/ls_bar"
-                    style="@style/Widget.AppCompat.SeekBar.Discrete"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="25dp"
-                    android:alpha="1"
-                    android:max="255" />
+                    android:layout_height="20dp"
+                    android:orientation="horizontal">
+
+                    <SeekBar
+                        android:id="@+id/ls_bar"
+                        style="@style/Widget.AppCompat.SeekBar.Discrete"
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:layout_weight="1"
+                        android:alpha="1"
+                        android:max="255" />
+
+                    <TextView
+                        android:id="@+id/ls_value"
+                        android:layout_width="100dp"
+                        android:layout_height="20dp"
+                        android:layout_weight="1"
+                        android:text="0" />
+                </LinearLayout>
 
                 <TextView
                     android:id="@+id/textView6"
@@ -124,19 +196,34 @@
                     android:layout_height="wrap_content"
                     android:text="Value upper bound" />
 
-                <SeekBar
-                    android:id="@+id/lv_bar"
-                    style="@style/Widget.AppCompat.SeekBar.Discrete"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="25dp"
-                    android:alpha="1"
-                    android:max="255" />
+                    android:layout_height="20dp"
+                    android:orientation="horizontal">
+
+                    <SeekBar
+                        android:id="@+id/lv_bar"
+                        style="@style/Widget.AppCompat.SeekBar.Discrete"
+                        android:layout_width="match_parent"
+                        android:layout_height="25dp"
+                        android:layout_weight="1"
+                        android:alpha="1"
+                        android:max="255" />
+
+                    <TextView
+                        android:id="@+id/lv_value"
+                        android:layout_width="100dp"
+                        android:layout_height="20dp"
+                        android:layout_weight="1"
+                        android:text="0" />
+                </LinearLayout>
 
                 <Button
                     android:id="@+id/rbghsv_button"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="35dp"
                     android:text="HSV" />
+
             </LinearLayout>
 
         </LinearLayout>

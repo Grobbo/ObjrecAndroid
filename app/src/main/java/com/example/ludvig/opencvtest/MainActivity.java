@@ -36,12 +36,12 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
     private Mat hsvMat;
     private Mat imgMat;
     private Mat resultMat;
-    private int high_hValue;
-    private int high_sValue;
-    private int high_vValue;
-    private int low_hValue;
-    private int low_sValue;
-    private int low_vValue;
+    int high_hValue;
+    int high_sValue;
+    int high_vValue;
+    int low_hValue;
+    int low_sValue;
+    int low_vValue;
     boolean isMenu = true;
     boolean isRBG = true;
 
@@ -50,150 +50,15 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
         super.onCreate(savedInstanceState);
         setWindowMode();
         OpenCVInit();
-        //setContentView(R.layout.activity_main);
-
-        mCameraView = new JavaCameraView(this, CameraBridgeViewBase.CAMERA_ID_ANY);
-        mCameraView.enableFpsMeter();
-        mCameraView.enableView();
-        mCameraView.setMaxFrameSize(800,640);
 
         setContentView(R.layout.activity_main);
-
+        mCameraView = GUI_Factory.getCameraView(this);
         LinearLayout fl = (LinearLayout) findViewById(R.id.Cameraframe);
         fl.addView(mCameraView,new LinearLayoutCompat.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT));
 
         mCameraView.setCvCameraViewListener(this);
+        GUI_Factory.menu_init(this);
 
-
-        SeekBar hh_bar = (SeekBar) findViewById(R.id.hh_bar);
-        hh_bar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                    high_hValue = seekBar.getProgress();
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-            }
-        });
-
-
-        SeekBar hs_bar = (SeekBar) findViewById(R.id.hs_bar);
-        hs_bar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                    high_sValue = seekBar.getProgress();
-            }
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-            }
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-            }
-        });
-
-        SeekBar hv_bar = (SeekBar) findViewById(R.id.hv_bar);
-        hv_bar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                    high_vValue = seekBar.getProgress();
-
-            }
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-            }
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-            }
-        });
-
-        SeekBar lh_bar = (SeekBar) findViewById(R.id.lh_bar);
-        lh_bar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                low_hValue = seekBar.getProgress();
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-            }
-        });
-
-        SeekBar ls_bar = (SeekBar) findViewById(R.id.ls_bar);
-        ls_bar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                low_sValue = seekBar.getProgress();
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-            }
-        });
-
-        SeekBar lv_bar = (SeekBar) findViewById(R.id.lv_bar);
-        lv_bar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                low_vValue = seekBar.getProgress();
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-            }
-        });
-
-        Button btn = (Button) findViewById(R.id.button);
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                LinearLayout l = (LinearLayout) findViewById(R.id.menu);
-                Button btn = (Button) findViewById(R.id.button);
-                if(isMenu){
-                    isMenu = false;
-                    l.setVisibility(View.INVISIBLE);
-                    l.setEnabled(false);
-                    btn.setText("SHOW MENU");
-                }else{
-                    isMenu = true;
-                    l.setVisibility(View.VISIBLE);
-                    l.setEnabled(true);
-                    btn.setText("HIDE MENU");
-                }
-            }
-        });
-
-        Button btn2 = (Button) findViewById(R.id.rbghsv_button);
-        btn2.setOnClickListener(new View.OnClickListener() {
-            Button b = (Button) findViewById(R.id.rbghsv_button);
-            @Override
-            public void onClick(View v) {
-                if(isRBG){
-                    isRBG = false;
-                    b.setText("RBG");
-                }else{
-                    isRBG = true;
-                    b.setText("HSV");
-                }
-            }
-        });
 
 
     }
