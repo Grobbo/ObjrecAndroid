@@ -25,9 +25,13 @@ import org.opencv.android.JavaCameraView;
 import org.opencv.android.OpenCVLoader;
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
+import org.opencv.core.MatOfPoint;
 import org.opencv.core.Scalar;
 import org.opencv.core.Size;
 import org.opencv.imgproc.Imgproc;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements CameraBridgeViewBase.CvCameraViewListener2 {
 
@@ -36,6 +40,9 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
     private Mat hsvMat;
     private Mat imgMat;
     private Mat resultMat;
+    Mat hierarcy;
+    Mat bwMat;
+
     int high_hValue;
     int high_sValue;
     int high_vValue;
@@ -85,6 +92,10 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
         hsvMat = new Mat();
         imgMat = new Mat();
         resultMat = new Mat();
+        hierarcy = new Mat();
+        bwMat = new Mat();
+
+
     }
 
     @Override
@@ -97,12 +108,12 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
 
         //...
         Core.inRange(hsvMat, new Scalar(low_hValue, low_sValue, low_vValue), new Scalar(high_hValue, high_sValue, high_vValue), resultMat);
-        //Imgproc.blur(resultMat,resultMat,new Size(10,10));
+        Imgproc.blur(resultMat,resultMat,new Size(7,7));
         //Imgproc.medianBlur(resultMat, resultMat, 3);
+        List<MatOfPoint> contours = new ArrayList<MatOfPoint>();
+        Imgproc.findContours(resultMat,contours,hierarcy,Imgproc.RETR_LIST,Imgproc.CHAIN_APPROX_SIMPLE);
+        Imgproc.drawContours(imgMat,contours,-1, new Scalar(0,255,0),3);
 
-
-        //Imgproc.findContours(...);
-        //Imgproc.drawContours(...);
         if(isRBG){
             return imgMat;
         }else{
