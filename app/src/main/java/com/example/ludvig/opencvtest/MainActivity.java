@@ -26,8 +26,10 @@ import org.opencv.android.OpenCVLoader;
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfPoint;
+import org.opencv.core.Point;
 import org.opencv.core.Scalar;
 import org.opencv.core.Size;
+import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.Imgproc;
 
 import java.util.ArrayList;
@@ -40,8 +42,8 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
     private Mat hsvMat;
     private Mat imgMat;
     private Mat resultMat;
-    Mat hierarcy;
-    Mat bwMat;
+    Mat hierarchy;
+    Mat circleMat;
 
     int high_hValue;
     int high_sValue;
@@ -92,8 +94,8 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
         hsvMat = new Mat();
         imgMat = new Mat();
         resultMat = new Mat();
-        hierarcy = new Mat();
-        bwMat = new Mat();
+        hierarchy = new Mat();
+        circleMat = new Mat();
 
 
     }
@@ -110,9 +112,21 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
         Core.inRange(hsvMat, new Scalar(low_hValue, low_sValue, low_vValue), new Scalar(high_hValue, high_sValue, high_vValue), resultMat);
         Imgproc.blur(resultMat,resultMat,new Size(7,7));
         //Imgproc.medianBlur(resultMat, resultMat, 3);
-        List<MatOfPoint> contours = new ArrayList<MatOfPoint>();
-        Imgproc.findContours(resultMat,contours,hierarcy,Imgproc.RETR_LIST,Imgproc.CHAIN_APPROX_SIMPLE);
-        Imgproc.drawContours(imgMat,contours,-1, new Scalar(0,255,0),3);
+        //List<MatOfPoint> contours = new ArrayList<MatOfPoint>();
+        //Imgproc.findContours(resultMat,contours,hierarchy,Imgproc.RETR_LIST,Imgproc.CHAIN_APPROX_SIMPLE);
+        //Imgproc.drawContours(imgMat,contours,-1, new Scalar(0,255,0),3);
+        if(isRBG) {         //TODO rita ut alltid istället?
+            Imgproc.HoughCircles(resultMat,circleMat,Imgproc.CV_HOUGH_GRADIENT,2,resultMat.rows()/4);  //4:e arg = resolution. 1 ger samma res, 2 ger halva res osv..
+            for(int i = 0; i < circleMat.cols();i++) {
+                double[] circle = circleMat.get(0, i);       //[0,1,2] = [x,y,r]
+
+                Point center = new Point(circle[0], circle[1]);
+
+                Imgproc.circle(imgMat, center, (int) circle[2], new Scalar(0, 255, 0), 3);
+            }
+        }
+
+
 
         if(isRBG){
             return imgMat;
