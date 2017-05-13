@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
+import android.widget.TextView;
 
 import org.opencv.android.CameraBridgeViewBase;
 import org.opencv.android.JavaCameraView;
@@ -59,15 +60,9 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
         super.onCreate(savedInstanceState);
         setWindowMode();
         OpenCVInit();
-
         setContentView(R.layout.activity_main);
-        mCameraView = GUI_Factory.getCameraView(this);
-        LinearLayout fl = (LinearLayout) findViewById(R.id.Cameraframe);
-        fl.addView(mCameraView,new LinearLayoutCompat.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT));
-
-        mCameraView.setCvCameraViewListener(this);
-        GUI_Factory.menu_init(this);
-
+        ComputerVisionLayout CVL = new ComputerVisionLayout();
+        CVL.GUI_init(this);
 
 
     }

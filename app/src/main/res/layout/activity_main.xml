@@ -15,10 +15,10 @@
             android:id="@+id/Cameraframe"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:weightSum="1"
+            android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_alignParentStart="true">
+            android:orientation="horizontal"
+            android:weightSum="1">
 
         </LinearLayout>
 
@@ -34,28 +34,28 @@
             android:visibility="visible"
             android:weightSum="1">
 
-            <Button
-                android:id="@+id/button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.11"
-                android:text="Hide Menu" />
-
             <LinearLayout
-                android:id="@+id/menu"
+                android:id="@+id/hide_menu"
                 android:layout_width="300dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1.21"
                 android:orientation="vertical"
                 android:visibility="visible">
 
+                <Button
+                    android:id="@+id/rbghsv_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="35dp"
+                    android:text="HSV" />
+
                 <TextView
-                    android:id="@+id/textView"
+                    android:id="@+id/hue_upper_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Hue Upper bound" />
 
                 <LinearLayout
+                    android:id="@+id/hh_layout"
                     android:layout_width="match_parent"
                     android:layout_height="20dp"
                     android:orientation="horizontal">
@@ -74,16 +74,19 @@
                         android:layout_width="100dp"
                         android:layout_height="20dp"
                         android:layout_weight="1"
+                        android:editable="true"
+                        android:enabled="true"
                         android:text="0" />
                 </LinearLayout>
 
                 <TextView
-                    android:id="@+id/textView2"
+                    android:id="@+id/sat_upper_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Saturation upper bound" />
 
                 <LinearLayout
+                    android:id="@+id/hs_layout"
                     android:layout_width="match_parent"
                     android:layout_height="20dp"
                     android:orientation="horizontal">
@@ -102,16 +105,19 @@
                         android:layout_width="100dp"
                         android:layout_height="20dp"
                         android:layout_weight="1"
+                        android:editable="true"
+                        android:enabled="true"
                         android:text="0" />
                 </LinearLayout>
 
                 <TextView
-                    android:id="@+id/textView3"
+                    android:id="@+id/val_upper_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Value upper bound" />
 
                 <LinearLayout
+                    android:id="@+id/hv_layout"
                     android:layout_width="match_parent"
                     android:layout_height="20dp"
                     android:orientation="horizontal">
@@ -130,17 +136,20 @@
                         android:layout_width="100dp"
                         android:layout_height="20dp"
                         android:layout_weight="1"
+                        android:editable="true"
+                        android:enabled="true"
                         android:text="0" />
 
                 </LinearLayout>
 
                 <TextView
-                    android:id="@+id/textView4"
+                    android:id="@+id/hue_lower_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Hue lower bound" />
 
                 <LinearLayout
+                    android:id="@+id/lh_layout"
                     android:layout_width="match_parent"
                     android:layout_height="20dp"
                     android:orientation="horizontal">
@@ -159,16 +168,19 @@
                         android:layout_width="100dp"
                         android:layout_height="25dp"
                         android:layout_weight="1"
+                        android:editable="true"
+                        android:enabled="true"
                         android:text="0" />
                 </LinearLayout>
 
                 <TextView
-                    android:id="@+id/textView5"
+                    android:id="@+id/sat_lower_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Saturation lower bound" />
 
                 <LinearLayout
+                    android:id="@+id/ls_layout"
                     android:layout_width="match_parent"
                     android:layout_height="20dp"
                     android:orientation="horizontal">
@@ -187,16 +199,19 @@
                         android:layout_width="100dp"
                         android:layout_height="20dp"
                         android:layout_weight="1"
+                        android:editable="true"
+                        android:enabled="true"
                         android:text="0" />
                 </LinearLayout>
 
                 <TextView
-                    android:id="@+id/textView6"
+                    android:id="@+id/val_lower_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Value lower bound" />
 
                 <LinearLayout
+                    android:id="@+id/lv_layout"
                     android:layout_width="match_parent"
                     android:layout_height="20dp"
                     android:orientation="horizontal">
@@ -215,16 +230,19 @@
                         android:layout_width="100dp"
                         android:layout_height="20dp"
                         android:layout_weight="1"
+                        android:editable="true"
+                        android:enabled="true"
                         android:text="0" />
                 </LinearLayout>
 
-                <Button
-                    android:id="@+id/rbghsv_button"
-                    android:layout_width="match_parent"
-                    android:layout_height="35dp"
-                    android:text="HSV" />
-
             </LinearLayout>
+
+            <Button
+                android:id="@+id/menu_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.11"
+                android:text="Hide Menu" />
 
         </LinearLayout>
 
