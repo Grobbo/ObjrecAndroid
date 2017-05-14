@@ -46,7 +46,8 @@
                     android:id="@+id/rbghsv_button"
                     android:layout_width="wrap_content"
                     android:layout_height="35dp"
-                    android:text="HSV" />
+                    android:background="@android:color/darker_gray"
+                    android:text=" CHANGE TO HSV " />
 
                 <TextView
                     android:id="@+id/hue_upper_text"

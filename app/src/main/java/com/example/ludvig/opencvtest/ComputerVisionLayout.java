@@ -27,29 +27,29 @@ public class ComputerVisionLayout {
 
     void GUI_init(final MainActivity main){
 
-        final LinearLayout cammeraFrame = (LinearLayout) main.findViewById(R.id.Cameraframe);
-        final LinearLayout menuLayout = (LinearLayout) main.findViewById(R.id.MenuLayout);
+        LinearLayout cammeraFrame = (LinearLayout) main.findViewById(R.id.Cameraframe);
+        //LinearLayout menuLayout = (LinearLayout) main.findViewById(R.id.MenuLayout);
         final LinearLayout hide_menu = (LinearLayout) main.findViewById(R.id.hide_menu);
-        final LinearLayout hueHigh_ll = (LinearLayout) main.findViewById(R.id.hh_layout);
-        final LinearLayout hueLow_ll = (LinearLayout) main.findViewById(R.id.lh_layout);
-        final LinearLayout satHigh_ll = (LinearLayout) main.findViewById(R.id.hs_layout);
-        final LinearLayout satLow_ll = (LinearLayout) main.findViewById(R.id.ls_layout);
-        final LinearLayout valHigh_ll = (LinearLayout) main.findViewById(R.id.hv_layout);
-        final LinearLayout valLow_ll = (LinearLayout) main.findViewById(R.id.lv_layout);
+        //LinearLayout hueHigh_ll = (LinearLayout) main.findViewById(R.id.hh_layout);
+        //LinearLayout hueLow_ll = (LinearLayout) main.findViewById(R.id.lh_layout);
+        //LinearLayout satHigh_ll = (LinearLayout) main.findViewById(R.id.hs_layout);
+        //LinearLayout satLow_ll = (LinearLayout) main.findViewById(R.id.ls_layout);
+        //LinearLayout valHigh_ll = (LinearLayout) main.findViewById(R.id.hv_layout);
+        //LinearLayout valLow_ll = (LinearLayout) main.findViewById(R.id.lv_layout);
 
-        final SeekBar hueHigh_bar = (SeekBar) main.findViewById(R.id.hh_bar);
-        final SeekBar hueLow_bar = (SeekBar) main.findViewById(R.id.lh_bar);
-        final SeekBar satHigh_bar = (SeekBar) main.findViewById(R.id.hs_bar);
-        final SeekBar satLow_bar = (SeekBar) main.findViewById(R.id.ls_bar);
-        final SeekBar valHigh_bar  = (SeekBar) main.findViewById(R.id.hv_bar);
-        final SeekBar valLow_bar  = (SeekBar) main.findViewById(R.id.lv_bar);
+        SeekBar hueHigh_bar = (SeekBar) main.findViewById(R.id.hh_bar);
+        SeekBar hueLow_bar = (SeekBar) main.findViewById(R.id.lh_bar);
+        SeekBar satHigh_bar = (SeekBar) main.findViewById(R.id.hs_bar);
+        SeekBar satLow_bar = (SeekBar) main.findViewById(R.id.ls_bar);
+        SeekBar valHigh_bar  = (SeekBar) main.findViewById(R.id.hv_bar);
+        SeekBar valLow_bar  = (SeekBar) main.findViewById(R.id.lv_bar);
 
-        final TextView val_hue_high  = (TextView) main.findViewById(R.id.hue_upper_text);
-        final TextView val_hue_low  = (TextView) main.findViewById(R.id.hue_lower_text);
-        final TextView val_sat_high  = (TextView) main.findViewById(R.id.sat_upper_text);
-        final TextView val_sat_low  = (TextView) main.findViewById(R.id.sat_lower_text);
-        final TextView val_val_high = (TextView) main.findViewById(R.id.val_upper_text);
-        final TextView val_val_low  = (TextView) main.findViewById(R.id.val_lower_text);
+        //TextView val_hue_high  = (TextView) main.findViewById(R.id.hue_upper_text);
+        //TextView val_hue_low  = (TextView) main.findViewById(R.id.hue_lower_text);
+        //TextView val_sat_high  = (TextView) main.findViewById(R.id.sat_upper_text);
+        //TextView val_sat_low  = (TextView) main.findViewById(R.id.sat_lower_text);
+        //TextView val_val_high = (TextView) main.findViewById(R.id.val_upper_text);
+        //TextView val_val_low  = (TextView) main.findViewById(R.id.val_lower_text);
 
         final Button menuButton = (Button) main.findViewById(R.id.menu_button);
         final Button rbghsvButton = (Button) main.findViewById(R.id.rbghsv_button);
@@ -58,8 +58,8 @@ public class ComputerVisionLayout {
         mCameraView.enableFpsMeter();
         mCameraView.enableView();
         mCameraView.setMaxFrameSize(800,640);
-        LinearLayout fl = (LinearLayout) main.findViewById(R.id.Cameraframe);
-        fl.addView(mCameraView,new LinearLayoutCompat.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT));
+
+        cammeraFrame.addView(mCameraView,new LinearLayoutCompat.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT));
 
         mCameraView.setCvCameraViewListener(main);
 
@@ -90,8 +90,7 @@ public class ComputerVisionLayout {
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 main.high_sValue = seekBar.getProgress();
                 TextView t = (TextView) main.findViewById(R.id.hs_value);
-                String str = ""+progress;
-                t.setText(str);
+                t.setText(String.valueOf(progress));
             }
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
@@ -106,8 +105,7 @@ public class ComputerVisionLayout {
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 main.high_vValue = seekBar.getProgress();
                 TextView t = (TextView) main.findViewById(R.id.hv_value);
-                String str = ""+progress;
-                t.setText(str);
+                t.setText(String.valueOf(progress));
 
             }
             @Override
@@ -120,13 +118,12 @@ public class ComputerVisionLayout {
         });
 
 
-        valLow_bar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+        hueLow_bar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 main.low_hValue = seekBar.getProgress();
                 TextView t = (TextView) main.findViewById(R.id.lh_value);
-                String str = ""+progress;
-                t.setText(str);
+                t.setText(String.valueOf(progress));
             }
 
             @Override
@@ -144,8 +141,7 @@ public class ComputerVisionLayout {
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 main.low_sValue = seekBar.getProgress();
                 TextView t = (TextView) main.findViewById(R.id.ls_value);
-                String str = ""+progress;
-                t.setText(str);
+                t.setText(String.valueOf(progress));
             }
 
             @Override
@@ -161,8 +157,7 @@ public class ComputerVisionLayout {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 main.low_vValue = seekBar.getProgress();TextView t = (TextView) main.findViewById(R.id.lv_value);
-                String str = ""+progress;
-                t.setText(str);
+                t.setText(String.valueOf(progress));
             }
 
             @Override
@@ -174,7 +169,7 @@ public class ComputerVisionLayout {
             }
         });
 
-
+        menuButton.setBackgroundColor(0);
         menuButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -197,10 +192,10 @@ public class ComputerVisionLayout {
             public void onClick(View v) {
                 if(main.isRBG){
                     main.isRBG = false;
-                    rbghsvButton.setText("CHANGE TO RBG");
+                    rbghsvButton.setText(" CHANGE TO RBG ");
                 }else{
                     main.isRBG = true;
-                    rbghsvButton.setText("CHANGE TO HSV");
+                    rbghsvButton.setText(" CHANGE TO HSV ");
                 }
             }
         });
