@@ -1,6 +1,7 @@
 package com.example.ludvig.opencvtest;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutCompat;
 import android.view.KeyEvent;
 import android.view.View;
@@ -54,6 +55,7 @@ public class ComputerVisionLayout {
 
         final Button menuButton = (Button) main.findViewById(R.id.menu_button);
         final Button rbghsvButton = (Button) main.findViewById(R.id.rbghsv_button);
+        final Button saveImportButton = (Button) main.findViewById(R.id.saveImport_button);
 
         JavaCameraView mCameraView = new JavaCameraView(main, CameraBridgeViewBase.CAMERA_ID_ANY);
         mCameraView.enableFpsMeter();
@@ -195,6 +197,14 @@ public class ComputerVisionLayout {
             }
         });
 
+        saveImportButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(main,SettingsActivity.class);
+                main.startActivity(i);
+            }
+        });
+
         val_hue_high.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -242,6 +252,8 @@ public class ComputerVisionLayout {
                 return true;
             }
         });
+
+
 
 
 
