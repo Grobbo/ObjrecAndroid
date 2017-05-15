@@ -1,8 +1,10 @@
 package com.example.ludvig.opencvtest;
 
+import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.graphics.Path;
+import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutCompat;
@@ -47,6 +49,8 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
     Mat circleMat;
     State state;
 
+    Vibrator vibrator;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +61,8 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
         setContentView(R.layout.activity_main);
         ComputerVisionLayout CVL = new ComputerVisionLayout(state);
         CVL.GUI_init(this);
+
+        vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 
 
     }
@@ -106,12 +112,16 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
         //Imgproc.drawContours(imgMat,contours,-1, new Scalar(0,255,0),3);
         if(state.isRBG) {         //TODO rita ut alltid istället?
             Imgproc.HoughCircles(resultMat,circleMat,Imgproc.CV_HOUGH_GRADIENT,2,resultMat.rows()/4);  //4:e arg = resolution. 1 ger samma res, 2 ger halva res osv..
-            for(int i = 0; i < circleMat.cols();i++) {
-                double[] circle = circleMat.get(0, i);       //[0,1,2] = [x,y,r]
 
-                Point center = new Point(circle[0], circle[1]);
+            if(!circleMat.empty()) {
+                vibrator.vibrate(100);
+                for (int i = 0; i < circleMat.cols(); i++) {
+                    double[] circle = circleMat.get(0, i);       //[0,1,2] = [x,y,r]
 
-                Imgproc.circle(imgMat, center, (int) circle[2], new Scalar(0, 255, 0), 3);
+                    Point center = new Point(circle[0], circle[1]);
+
+                    Imgproc.circle(imgMat, center, (int) circle[2], new Scalar(0, 255, 0), 3);
+                }
             }
         }
 
