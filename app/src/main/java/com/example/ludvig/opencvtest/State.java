@@ -6,12 +6,12 @@ package com.example.ludvig.opencvtest;
 
 public class State {
 
-    int high_hValue;
-    int high_sValue;
-    int high_vValue;
-    int low_hValue;
-    int low_sValue;
-    int low_vValue;
+    int high_hValue = 0;
+    int high_sValue = 0;
+    int high_vValue = 0;
+    int low_hValue = 0;
+    int low_sValue = 0;
+    int low_vValue = 0;
     boolean isMenu = true;
     boolean isRBG = true;
 

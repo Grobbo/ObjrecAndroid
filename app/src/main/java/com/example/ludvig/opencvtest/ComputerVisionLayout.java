@@ -17,14 +17,16 @@ import org.opencv.android.CameraBridgeViewBase;
 import org.opencv.android.JavaCameraView;
 
 import static android.R.attr.id;
+import static android.R.attr.state_empty;
 
 /**
  * Created by Erik on 2017-05-13.
  */
 
 public class ComputerVisionLayout {
-
-    public ComputerVisionLayout() {
+    State state;
+    public ComputerVisionLayout(State state) {
+        this.state = state;
     }
 
     void GUI_init(final MainActivity main){
@@ -71,7 +73,7 @@ public class ComputerVisionLayout {
         hueHigh_bar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                main.high_hValue = seekBar.getProgress();
+                state.high_hValue = seekBar.getProgress();
                 val_hue_high.setText(String.valueOf(progress));
             }
 
@@ -89,7 +91,7 @@ public class ComputerVisionLayout {
         satHigh_bar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                main.high_sValue = seekBar.getProgress();
+                state.high_sValue = seekBar.getProgress();
                 val_sat_high.setText(String.valueOf(progress));
             }
             @Override
@@ -103,7 +105,7 @@ public class ComputerVisionLayout {
         valHigh_bar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                main.high_vValue = seekBar.getProgress();
+                state.high_vValue = seekBar.getProgress();
                 val_val_high.setText(String.valueOf(progress));
 
             }
@@ -120,7 +122,7 @@ public class ComputerVisionLayout {
         hueLow_bar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                main.low_hValue = seekBar.getProgress();
+                state.low_hValue = seekBar.getProgress();
                 val_hue_low.setText(String.valueOf(progress));
             }
 
@@ -137,7 +139,7 @@ public class ComputerVisionLayout {
         satLow_bar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                main.low_sValue = seekBar.getProgress();
+                state.low_sValue = seekBar.getProgress();
                 val_sat_low.setText(String.valueOf(progress));
             }
 
@@ -153,7 +155,7 @@ public class ComputerVisionLayout {
         valLow_bar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                main.low_vValue = seekBar.getProgress();
+                state.low_vValue = seekBar.getProgress();
                 val_val_low.setText(String.valueOf(progress));
             }
 
@@ -170,13 +172,13 @@ public class ComputerVisionLayout {
         menuButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(main.isMenu){
-                    main.isMenu = false;
+                if(state.isMenu){
+                    state.isMenu = false;
                     hide_menu.setVisibility(View.INVISIBLE);
                     hide_menu.setEnabled(false);
                     menuButton.setText("SHOW MENU");
                 }else{
-                    main.isMenu = true;
+                    state.isMenu = true;
                     hide_menu.setVisibility(View.VISIBLE);
                     hide_menu.setEnabled(true);
                     menuButton.setText("HIDE MENU");
@@ -187,11 +189,11 @@ public class ComputerVisionLayout {
         rbghsvButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(main.isRBG){
-                    main.isRBG = false;
+                if(state.isRBG){
+                    state.isRBG = false;
                     rbghsvButton.setText(" CHANGE TO RBG ");
                 }else{
-                    main.isRBG = true;
+                    state.isRBG = true;
                     rbghsvButton.setText(" CHANGE TO HSV ");
                 }
             }

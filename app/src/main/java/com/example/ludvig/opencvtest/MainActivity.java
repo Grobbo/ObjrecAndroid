@@ -45,23 +45,17 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
     private Mat resultMat;
     Mat hierarchy;
     Mat circleMat;
-
-    int high_hValue;
-    int high_sValue;
-    int high_vValue;
-    int low_hValue;
-    int low_sValue;
-    int low_vValue;
-    boolean isMenu = true;
-    boolean isRBG = true;
+    State state;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setWindowMode();
         OpenCVInit();
+
+        state = new State();
         setContentView(R.layout.activity_main);
-        ComputerVisionLayout CVL = new ComputerVisionLayout();
+        ComputerVisionLayout CVL = new ComputerVisionLayout(state);
         CVL.GUI_init(this);
 
 
@@ -104,13 +98,13 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
         Imgproc.cvtColor(imgMat,hsvMat, Imgproc.COLOR_RGB2HSV);   //RGB -> HSV
 
         //...
-        Core.inRange(hsvMat, new Scalar(low_hValue, low_sValue, low_vValue), new Scalar(high_hValue, high_sValue, high_vValue), resultMat);
+        Core.inRange(hsvMat, new Scalar(state.low_hValue, state.low_sValue, state.low_vValue), new Scalar(state.high_hValue, state.high_sValue, state.high_vValue), resultMat);
         Imgproc.blur(resultMat,resultMat,new Size(7,7));
         //Imgproc.medianBlur(resultMat, resultMat, 3);
         //List<MatOfPoint> contours = new ArrayList<MatOfPoint>();
         //Imgproc.findContours(resultMat,contours,hierarchy,Imgproc.RETR_LIST,Imgproc.CHAIN_APPROX_SIMPLE);
         //Imgproc.drawContours(imgMat,contours,-1, new Scalar(0,255,0),3);
-        if(isRBG) {         //TODO rita ut alltid istället?
+        if(state.isRBG) {         //TODO rita ut alltid istället?
             Imgproc.HoughCircles(resultMat,circleMat,Imgproc.CV_HOUGH_GRADIENT,2,resultMat.rows()/4);  //4:e arg = resolution. 1 ger samma res, 2 ger halva res osv..
             for(int i = 0; i < circleMat.cols();i++) {
                 double[] circle = circleMat.get(0, i);       //[0,1,2] = [x,y,r]
@@ -123,7 +117,7 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
 
 
 
-        if(isRBG){
+        if(state.isRBG){
             return imgMat;
         }else{
             return resultMat;
