@@ -87,7 +87,7 @@
                         android:layout_height="20dp"
                         android:layout_weight="1"
                         android:alpha="1"
-                        android:max="255" />
+                        android:max="180" />
 
                     <EditText
                         android:id="@+id/hh_value"

@@ -19,6 +19,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -49,6 +50,10 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
     Mat circleMat;
     State state;
 
+    RadioButton contoursBtn;
+    RadioButton circleBtn;
+    RadioButton noneBtn;
+
     Vibrator vibrator;
 
     @Override
@@ -64,7 +69,9 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
 
         vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 
-
+        contoursBtn = (RadioButton) findViewById(R.id.RadioContours);
+        circleBtn = (RadioButton) findViewById(R.id.radiocircle);
+        noneBtn = (RadioButton) findViewById(R.id.radionone);
     }
 
     private void OpenCVInit(){
@@ -106,24 +113,31 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
         //...
         Core.inRange(hsvMat, new Scalar(state.low_hValue, state.low_sValue, state.low_vValue), new Scalar(state.high_hValue, state.high_sValue, state.high_vValue), resultMat);
         Imgproc.blur(resultMat,resultMat,new Size(7,7));
-        //Imgproc.medianBlur(resultMat, resultMat, 3);
-        //List<MatOfPoint> contours = new ArrayList<MatOfPoint>();
-        //Imgproc.findContours(resultMat,contours,hierarchy,Imgproc.RETR_LIST,Imgproc.CHAIN_APPROX_SIMPLE);
-        //Imgproc.drawContours(imgMat,contours,-1, new Scalar(0,255,0),3);
-        if(state.isRBG) {         //TODO rita ut alltid istället?
-            Imgproc.HoughCircles(resultMat,circleMat,Imgproc.CV_HOUGH_GRADIENT,2,resultMat.rows()/4);  //4:e arg = resolution. 1 ger samma res, 2 ger halva res osv..
 
-            if(!circleMat.empty()) {
-                vibrator.vibrate(100);
-                for (int i = 0; i < circleMat.cols(); i++) {
-                    double[] circle = circleMat.get(0, i);       //[0,1,2] = [x,y,r]
+        if(contoursBtn.isChecked()){
+            Imgproc.medianBlur(resultMat, resultMat, 3);
+            List<MatOfPoint> contours = new ArrayList<MatOfPoint>();
+            Imgproc.findContours(resultMat,contours,hierarchy,Imgproc.RETR_LIST,Imgproc.CHAIN_APPROX_SIMPLE);
+            Imgproc.drawContours(imgMat,contours,-1, new Scalar(0,255,0),3);
+        }
 
-                    Point center = new Point(circle[0], circle[1]);
+        if(circleBtn.isChecked()){
+            if(state.isRBG) {         //TODO rita ut alltid istället?
+                Imgproc.HoughCircles(resultMat,circleMat,Imgproc.CV_HOUGH_GRADIENT,2,resultMat.rows()/4);  //4:e arg = resolution. 1 ger samma res, 2 ger halva res osv..
 
-                    Imgproc.circle(imgMat, center, (int) circle[2], new Scalar(0, 255, 0), 3);
+                if(!circleMat.empty()) {
+                    //vibrator.vibrate(100);
+                    for (int i = 0; i < circleMat.cols(); i++) {
+                        double[] circle = circleMat.get(0, i);       //[0,1,2] = [x,y,r]
+
+                        Point center = new Point(circle[0], circle[1]);
+
+                        Imgproc.circle(imgMat, center, (int) circle[2], new Scalar(0, 255, 0), 3);
+                    }
                 }
             }
         }
+
 
 
 
