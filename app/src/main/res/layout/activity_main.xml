@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/LinearLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -42,12 +43,30 @@
                 android:orientation="vertical"
                 android:visibility="visible">
 
-                <Button
-                    android:id="@+id/rbghsv_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="35dp"
-                    android:background="@android:color/darker_gray"
-                    android:text=" CHANGE TO HSV " />
+                <LinearLayout
+                    android:id="@+id/setupmenu"
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/rbghsv_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@android:color/darker_gray"
+                        android:text=" CHANGE TO HSV " />
+
+                    <Button
+                        android:id="@+id/button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="5dp"
+                        android:layout_weight="1"
+                        android:background="@android:color/darker_gray"
+                        android:text="Save/Import Settings" />
+
+                </LinearLayout>
 
                 <TextView
                     android:id="@+id/hue_upper_text"
@@ -70,7 +89,7 @@
                         android:alpha="1"
                         android:max="255" />
 
-                    <TextView
+                    <EditText
                         android:id="@+id/hh_value"
                         android:layout_width="100dp"
                         android:layout_height="20dp"
@@ -101,7 +120,7 @@
                         android:alpha="1"
                         android:max="255" />
 
-                    <TextView
+                    <EditText
                         android:id="@+id/hs_value"
                         android:layout_width="100dp"
                         android:layout_height="20dp"
@@ -132,7 +151,7 @@
                         android:alpha="1"
                         android:max="255" />
 
-                    <TextView
+                    <EditText
                         android:id="@+id/hv_value"
                         android:layout_width="100dp"
                         android:layout_height="20dp"
@@ -164,7 +183,7 @@
                         android:alpha="1"
                         android:max="255" />
 
-                    <TextView
+                    <EditText
                         android:id="@+id/lh_value"
                         android:layout_width="100dp"
                         android:layout_height="25dp"
@@ -195,7 +214,7 @@
                         android:alpha="1"
                         android:max="255" />
 
-                    <TextView
+                    <EditText
                         android:id="@+id/ls_value"
                         android:layout_width="100dp"
                         android:layout_height="20dp"
@@ -226,7 +245,7 @@
                         android:alpha="1"
                         android:max="255" />
 
-                    <TextView
+                    <EditText
                         android:id="@+id/lv_value"
                         android:layout_width="100dp"
                         android:layout_height="20dp"
@@ -243,6 +262,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.11"
+                android:elevation="1dp"
                 android:text="Hide Menu" />
 
         </LinearLayout>
