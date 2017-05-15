@@ -94,9 +94,16 @@
                         android:layout_width="100dp"
                         android:layout_height="20dp"
                         android:layout_weight="1"
+                        android:autoText="false"
+                        android:background="@android:color/darker_gray"
                         android:editable="true"
-                        android:enabled="true"
-                        android:text="0" />
+                        android:gravity="center"
+                        android:inputType="number"
+                        android:nestedScrollingEnabled="false"
+                        android:selectAllOnFocus="true"
+                        android:singleLine="false"
+                        android:text="0"
+                        android:textColor="@android:color/black" />
                 </LinearLayout>
 
                 <TextView
@@ -125,9 +132,14 @@
                         android:layout_width="100dp"
                         android:layout_height="20dp"
                         android:layout_weight="1"
+                        android:background="@android:color/darker_gray"
                         android:editable="true"
-                        android:enabled="true"
-                        android:text="0" />
+                        android:gravity="center"
+                        android:inputType="number"
+                        android:nestedScrollingEnabled="false"
+                        android:selectAllOnFocus="true"
+                        android:text="0"
+                        android:textColor="@android:color/black" />
                 </LinearLayout>
 
                 <TextView
@@ -156,9 +168,14 @@
                         android:layout_width="100dp"
                         android:layout_height="20dp"
                         android:layout_weight="1"
+                        android:background="@android:color/darker_gray"
                         android:editable="true"
-                        android:enabled="true"
-                        android:text="0" />
+                        android:gravity="center"
+                        android:inputType="number"
+                        android:nestedScrollingEnabled="false"
+                        android:selectAllOnFocus="true"
+                        android:text="0"
+                        android:textColor="@android:color/black" />
 
                 </LinearLayout>
 
@@ -188,9 +205,14 @@
                         android:layout_width="100dp"
                         android:layout_height="25dp"
                         android:layout_weight="1"
+                        android:background="@android:color/darker_gray"
                         android:editable="true"
-                        android:enabled="true"
-                        android:text="0" />
+                        android:gravity="center"
+                        android:inputType="number"
+                        android:nestedScrollingEnabled="false"
+                        android:selectAllOnFocus="true"
+                        android:text="0"
+                        android:textColor="@android:color/black" />
                 </LinearLayout>
 
                 <TextView
@@ -219,9 +241,14 @@
                         android:layout_width="100dp"
                         android:layout_height="20dp"
                         android:layout_weight="1"
+                        android:background="@android:color/darker_gray"
                         android:editable="true"
-                        android:enabled="true"
-                        android:text="0" />
+                        android:gravity="center"
+                        android:inputType="number"
+                        android:nestedScrollingEnabled="false"
+                        android:selectAllOnFocus="true"
+                        android:text="0"
+                        android:textColor="@android:color/black" />
                 </LinearLayout>
 
                 <TextView
@@ -250,9 +277,15 @@
                         android:layout_width="100dp"
                         android:layout_height="20dp"
                         android:layout_weight="1"
+                        android:background="@android:color/darker_gray"
                         android:editable="true"
-                        android:enabled="true"
-                        android:text="0" />
+                        android:gravity="center"
+                        android:hapticFeedbackEnabled="true"
+                        android:inputType="number"
+                        android:nestedScrollingEnabled="false"
+                        android:selectAllOnFocus="true"
+                        android:text="0"
+                        android:textColor="@android:color/black" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -262,7 +295,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.11"
-                android:elevation="1dp"
+                android:elevation="0dp"
                 android:text="Hide Menu" />
 
         </LinearLayout>

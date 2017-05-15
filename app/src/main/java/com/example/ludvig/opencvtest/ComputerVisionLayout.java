@@ -2,6 +2,7 @@ package com.example.ludvig.opencvtest;
 
 import android.content.Context;
 import android.support.v7.widget.LinearLayoutCompat;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -37,19 +38,19 @@ public class ComputerVisionLayout {
         //LinearLayout valHigh_ll = (LinearLayout) main.findViewById(R.id.hv_layout);
         //LinearLayout valLow_ll = (LinearLayout) main.findViewById(R.id.lv_layout);
 
-        SeekBar hueHigh_bar = (SeekBar) main.findViewById(R.id.hh_bar);
-        SeekBar hueLow_bar = (SeekBar) main.findViewById(R.id.lh_bar);
-        SeekBar satHigh_bar = (SeekBar) main.findViewById(R.id.hs_bar);
-        SeekBar satLow_bar = (SeekBar) main.findViewById(R.id.ls_bar);
-        SeekBar valHigh_bar  = (SeekBar) main.findViewById(R.id.hv_bar);
-        SeekBar valLow_bar  = (SeekBar) main.findViewById(R.id.lv_bar);
+        final SeekBar hueHigh_bar = (SeekBar) main.findViewById(R.id.hh_bar);
+        final SeekBar hueLow_bar = (SeekBar) main.findViewById(R.id.lh_bar);
+        final SeekBar satHigh_bar = (SeekBar) main.findViewById(R.id.hs_bar);
+        final SeekBar satLow_bar = (SeekBar) main.findViewById(R.id.ls_bar);
+        final SeekBar valHigh_bar  = (SeekBar) main.findViewById(R.id.hv_bar);
+        final SeekBar valLow_bar  = (SeekBar) main.findViewById(R.id.lv_bar);
 
-        //TextView val_hue_high  = (TextView) main.findViewById(R.id.hue_upper_text);
-        //TextView val_hue_low  = (TextView) main.findViewById(R.id.hue_lower_text);
-        //TextView val_sat_high  = (TextView) main.findViewById(R.id.sat_upper_text);
-        //TextView val_sat_low  = (TextView) main.findViewById(R.id.sat_lower_text);
-        //TextView val_val_high = (TextView) main.findViewById(R.id.val_upper_text);
-        //TextView val_val_low  = (TextView) main.findViewById(R.id.val_lower_text);
+        final EditText val_hue_high  = (EditText) main.findViewById(R.id.hh_value);
+        final EditText val_hue_low  = (EditText) main.findViewById(R.id.lh_value);
+        final EditText val_sat_high  = (EditText) main.findViewById(R.id.hs_value);
+        final EditText val_sat_low  = (EditText) main.findViewById(R.id.ls_value);
+        final EditText val_val_high = (EditText) main.findViewById(R.id.hv_value);
+        final EditText val_val_low  = (EditText) main.findViewById(R.id.lv_value);
 
         final Button menuButton = (Button) main.findViewById(R.id.menu_button);
         final Button rbghsvButton = (Button) main.findViewById(R.id.rbghsv_button);
@@ -69,9 +70,7 @@ public class ComputerVisionLayout {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 main.high_hValue = seekBar.getProgress();
-                TextView t = (TextView) main.findViewById(R.id.hh_value);
-                String str = ""+progress;
-                t.setText(str);
+                val_hue_high.setText(String.valueOf(progress));
             }
 
             @Override
@@ -89,8 +88,7 @@ public class ComputerVisionLayout {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 main.high_sValue = seekBar.getProgress();
-                TextView t = (TextView) main.findViewById(R.id.hs_value);
-                t.setText(String.valueOf(progress));
+                val_sat_high.setText(String.valueOf(progress));
             }
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
@@ -104,8 +102,7 @@ public class ComputerVisionLayout {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 main.high_vValue = seekBar.getProgress();
-                TextView t = (TextView) main.findViewById(R.id.hv_value);
-                t.setText(String.valueOf(progress));
+                val_val_high.setText(String.valueOf(progress));
 
             }
             @Override
@@ -122,8 +119,7 @@ public class ComputerVisionLayout {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 main.low_hValue = seekBar.getProgress();
-                TextView t = (TextView) main.findViewById(R.id.lh_value);
-                t.setText(String.valueOf(progress));
+                val_hue_low.setText(String.valueOf(progress));
             }
 
             @Override
@@ -140,8 +136,7 @@ public class ComputerVisionLayout {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 main.low_sValue = seekBar.getProgress();
-                TextView t = (TextView) main.findViewById(R.id.ls_value);
-                t.setText(String.valueOf(progress));
+                val_sat_low.setText(String.valueOf(progress));
             }
 
             @Override
@@ -156,8 +151,8 @@ public class ComputerVisionLayout {
         valLow_bar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                main.low_vValue = seekBar.getProgress();TextView t = (TextView) main.findViewById(R.id.lv_value);
-                t.setText(String.valueOf(progress));
+                main.low_vValue = seekBar.getProgress();
+                val_val_low.setText(String.valueOf(progress));
             }
 
             @Override
@@ -197,6 +192,54 @@ public class ComputerVisionLayout {
                     main.isRBG = true;
                     rbghsvButton.setText(" CHANGE TO HSV ");
                 }
+            }
+        });
+
+        val_hue_high.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                hueHigh_bar.setProgress(Integer.parseInt(v.getText().toString()));
+                return true;
+            }
+        });
+
+        val_hue_low.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                hueLow_bar.setProgress(Integer.parseInt(v.getText().toString()));
+                return true;
+            }
+        });
+
+        val_sat_high.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                satHigh_bar.setProgress(Integer.parseInt(v.getText().toString()));
+                return true;
+            }
+        });
+
+        val_sat_low.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                satLow_bar.setProgress(Integer.parseInt(v.getText().toString()));
+                return true;
+            }
+        });
+
+        val_val_high.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                valHigh_bar.setProgress(Integer.parseInt(v.getText().toString()));
+                return true;
+            }
+        });
+
+        val_val_low.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                valLow_bar.setProgress(Integer.parseInt(v.getText().toString()));
+                return true;
             }
         });
 
