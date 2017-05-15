@@ -286,35 +286,47 @@
                         android:selectAllOnFocus="true"
                         android:text="0"
                         android:textColor="@android:color/black" />
+
                 </LinearLayout>
 
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="35dp"
-                android:orientation="horizontal">
-
-                <RadioButton
-                    android:id="@+id/radiocircle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="0dp"
-                    android:layout_marginRight="5dp"
-                    android:text="Circle" />
-
-                <RadioButton
-                    android:id="@+id/RadioContours"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="5dp"
-                    android:text="Contours" />
-
-                <RadioButton
-                    android:id="@+id/radionone"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="None" />
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <RadioGroup
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:checkedButton="@+id/radionone"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/RadioContours"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="5dp"
+                            android:text="Contours" />
+
+                        <RadioButton
+                            android:id="@+id/radiocircle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="0dp"
+                            android:layout_marginRight="5dp"
+                            android:text="Circle" />
+
+                        <RadioButton
+                            android:id="@+id/radionone"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="5dp"
+                            android:text="None" />
+
+                    </RadioGroup>
+
+                </LinearLayout>
+
             </LinearLayout>
 
             <Button
