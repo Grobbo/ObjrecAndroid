@@ -26,10 +26,13 @@ public class SettingsActivity extends AppCompatActivity{
 
         ListView list = (ListView) findViewById(R.id.objlist);
         ArrayList<SavedObj> arraylist = new ArrayList<SavedObj>();
+
         SavedObj test = new SavedObj("GARGAMEL");
         SavedObj test2 = new SavedObj("GAMMELSMUFEN");
+
         arraylist.add(test);
         arraylist.add(test2);
+
         ArrayAdapter<SavedObj> adapter = new ArrayAdapter<SavedObj>(this,android.R.layout.simple_list_item_1,arraylist);
 
         list.setAdapter(adapter);
