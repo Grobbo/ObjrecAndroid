@@ -16,18 +16,25 @@
         android:gravity="bottom"
         android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/loadButton"
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="@string/file_name"
             android:layout_weight="1"
-            android:hint="@string/load_button" />
+            android:layout_marginLeft="20dp"/>
+
+        <EditText
+            android:id="@+id/nameEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.8"
+            android:gravity="center"/>
 
         <Button
             android:id="@+id/saveButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="0.6"
             android:hint="@string/save_button" />
     </LinearLayout>
 

@@ -2,6 +2,7 @@ package com.example.ludvig.opencvtest;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Parcelable;
 import android.support.v7.widget.LinearLayoutCompat;
 import android.view.KeyEvent;
 import android.view.View;
@@ -15,6 +16,8 @@ import android.widget.TextView;
 
 import org.opencv.android.CameraBridgeViewBase;
 import org.opencv.android.JavaCameraView;
+
+import java.io.Serializable;
 
 import static android.R.attr.id;
 import static android.R.attr.state_empty;
@@ -203,6 +206,7 @@ public class ComputerVisionLayout {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(main,SettingsActivity.class);
+                i.putExtra("state", main.state);
                 main.startActivity(i);
             }
         });

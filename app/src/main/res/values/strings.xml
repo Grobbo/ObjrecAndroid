@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">ComputerVision</string>
-    <string name="save_button">Save Settings</string>
-    <string name="load_button">Load Settings</string>
-
+    <string name="save_button">Save Current Settings</string>
+    <string name="file_name">File Name:</string>
 </resources>
