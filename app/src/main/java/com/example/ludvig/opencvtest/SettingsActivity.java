@@ -6,7 +6,10 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
+import java.util.ArrayList;
 
 /**
  * Created by Ludvig on 2017-05-15.
@@ -22,7 +25,14 @@ public class SettingsActivity extends AppCompatActivity{
         setContentView(R.layout.activity_settings);
 
         ListView list = (ListView) findViewById(R.id.objlist);
-        list.
+        ArrayList<SavedObj> arraylist = new ArrayList<SavedObj>();
+        SavedObj test = new SavedObj("GARGAMEL");
+        SavedObj test2 = new SavedObj("GAMMELSMUFEN");
+        arraylist.add(test);
+        arraylist.add(test2);
+        ArrayAdapter<SavedObj> adapter = new ArrayAdapter<SavedObj>(this,android.R.layout.simple_list_item_1,arraylist);
+
+        list.setAdapter(adapter);
 
 
     }
