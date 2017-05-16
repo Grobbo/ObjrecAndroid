@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
     RadioButton contoursBtn;
     RadioButton circleBtn;
     RadioButton noneBtn;
+    RadioButton onBtn;
 
     Vibrator vibrator;
 
@@ -72,6 +73,7 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
         contoursBtn = (RadioButton) findViewById(R.id.RadioContours);
         circleBtn = (RadioButton) findViewById(R.id.radiocircle);
         noneBtn = (RadioButton) findViewById(R.id.radionone);
+        onBtn = (RadioButton) findViewById(R.id.VibOn);
     }
 
     private void OpenCVInit(){
@@ -126,7 +128,9 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
                 Imgproc.HoughCircles(resultMat,circleMat,Imgproc.CV_HOUGH_GRADIENT,2,resultMat.rows()/4);  //4:e arg = resolution. 1 ger samma res, 2 ger halva res osv..
 
                 if(!circleMat.empty()) {
-                    //vibrator.vibrate(100);
+                    if(onBtn.isChecked()){
+                        vibrator.vibrate(100);
+                    }
                     for (int i = 0; i < circleMat.cols(); i++) {
                         double[] circle = circleMat.get(0, i);       //[0,1,2] = [x,y,r]
 
@@ -137,9 +141,6 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
                 }
             }
         }
-
-
-
 
         if(state.isRBG){
             return imgMat;

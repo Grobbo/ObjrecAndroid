@@ -297,9 +297,16 @@
 
                     <RadioGroup
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:checkedButton="@+id/radionone"
                         android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/showText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Show" />
 
                         <RadioButton
                             android:id="@+id/RadioContours"
@@ -325,6 +332,35 @@
 
                     </RadioGroup>
 
+                    <RadioGroup
+                        android:id="@+id/vibGroup"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:checkedButton="@+id/vibOff"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/vibText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Vibrator" />
+
+                        <RadioButton
+                            android:id="@+id/VibOn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="ON" />
+
+                        <RadioButton
+                            android:id="@+id/vibOff"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="OFF" />
+                    </RadioGroup>
+
                 </LinearLayout>
 
             </LinearLayout>
@@ -332,7 +368,7 @@
             <Button
                 android:id="@+id/menu_button"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:layout_weight="0.11"
                 android:elevation="0dp"
                 android:text="Hide Menu" />
