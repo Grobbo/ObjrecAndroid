@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ListView;
 
 /**
  * Created by Ludvig on 2017-05-15.
@@ -19,6 +20,9 @@ public class SettingsActivity extends AppCompatActivity{
         setWindowMode();
 
         setContentView(R.layout.activity_settings);
+
+        ListView list = (ListView) findViewById(R.id.objlist);
+        list.
 
 
     }
