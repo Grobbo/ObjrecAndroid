@@ -27,4 +27,15 @@ public class SavedObj {
         return Name;
     }
 
+    public State getStateObj(){
+        State s = new State();
+        s.high_hValue = high_hue;
+        s.high_sValue = high_sat;
+        s.high_vValue = high_val;
+        s.low_hValue = low_hue;
+        s.low_sValue = low_sat;
+        s.low_vValue = low_val;
+        return s;
+    }
+
 }

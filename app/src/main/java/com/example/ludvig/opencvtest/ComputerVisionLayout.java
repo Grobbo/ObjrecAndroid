@@ -27,7 +27,15 @@ import static android.R.attr.state_empty;
  */
 
 public class ComputerVisionLayout {
-    State state;
+    private State state;
+    private SeekBar hueHigh_bar;
+    private SeekBar hueLow_bar;
+    private SeekBar satHigh_bar;
+    private SeekBar satLow_bar;
+    private SeekBar valHigh_bar;
+    private SeekBar valLow_bar;
+
+
     public ComputerVisionLayout(State state) {
         this.state = state;
     }
@@ -44,12 +52,12 @@ public class ComputerVisionLayout {
         //LinearLayout valHigh_ll = (LinearLayout) main.findViewById(R.id.hv_layout);
         //LinearLayout valLow_ll = (LinearLayout) main.findViewById(R.id.lv_layout);
 
-        final SeekBar hueHigh_bar = (SeekBar) main.findViewById(R.id.hh_bar);
-        final SeekBar hueLow_bar = (SeekBar) main.findViewById(R.id.lh_bar);
-        final SeekBar satHigh_bar = (SeekBar) main.findViewById(R.id.hs_bar);
-        final SeekBar satLow_bar = (SeekBar) main.findViewById(R.id.ls_bar);
-        final SeekBar valHigh_bar  = (SeekBar) main.findViewById(R.id.hv_bar);
-        final SeekBar valLow_bar  = (SeekBar) main.findViewById(R.id.lv_bar);
+        hueHigh_bar = (SeekBar) main.findViewById(R.id.hh_bar);
+        hueLow_bar = (SeekBar) main.findViewById(R.id.lh_bar);
+        satHigh_bar = (SeekBar) main.findViewById(R.id.hs_bar);
+        satLow_bar = (SeekBar) main.findViewById(R.id.ls_bar);
+        valHigh_bar  = (SeekBar) main.findViewById(R.id.hv_bar);
+        valLow_bar  = (SeekBar) main.findViewById(R.id.lv_bar);
 
         final EditText val_hue_high  = (EditText) main.findViewById(R.id.hh_value);
         final EditText val_hue_low  = (EditText) main.findViewById(R.id.lh_value);
@@ -207,7 +215,7 @@ public class ComputerVisionLayout {
             public void onClick(View v) {
                 Intent i = new Intent(main,SettingsActivity.class);
                 i.putExtra("state", main.state);
-                main.startActivity(i);
+                main.startActivityForResult(i,0);
             }
         });
 
@@ -258,10 +266,15 @@ public class ComputerVisionLayout {
                 return true;
             }
         });
-
-
-
-
+    }
+    public void setNewState(State state){
+        this.state = state;
+        hueHigh_bar.setProgress(state.high_hValue);
+        satHigh_bar.setProgress(state.high_sValue);
+        valHigh_bar.setProgress(state.high_vValue);
+        hueLow_bar.setProgress(state.low_hValue);
+        satLow_bar.setProgress(state.low_sValue);
+        valLow_bar.setProgress(state.low_vValue);
 
     }
 }

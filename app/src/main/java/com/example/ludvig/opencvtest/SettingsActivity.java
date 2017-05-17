@@ -1,5 +1,6 @@
 package com.example.ludvig.opencvtest;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -43,6 +45,7 @@ public class SettingsActivity extends AppCompatActivity {
     State state;
     ArrayList<SavedObj> arraylist;
     ArrayAdapter<SavedObj> adapter;
+    ListView list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,16 +56,18 @@ public class SettingsActivity extends AppCompatActivity {
         state = (State) i.getSerializableExtra("state");
 
         setContentView(R.layout.activity_settings);
-        ListView list = (ListView) findViewById(R.id.objlist);
+        list = (ListView) findViewById(R.id.objlist);
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                loadSelectedState(position);
+            }
+        });
         saveButton = (Button) findViewById(R.id.saveButton);
         nameText = (EditText) findViewById(R.id.nameEditText);
 
 
         arraylist = new ArrayList<SavedObj>();
-        SavedObj test = new SavedObj("GARGAMEL", 0, 0, 0, 0, 0, 0);
-        SavedObj test2 = new SavedObj("GAMMELSMUFEN", 0, 0, 0, 0, 0, 0);
-        arraylist.add(test);
-        arraylist.add(test2);
 
         adapter = new ArrayAdapter<SavedObj>(this, android.R.layout.simple_list_item_1, arraylist);
         list.setAdapter(adapter);
@@ -145,4 +150,16 @@ public class SettingsActivity extends AppCompatActivity {
         }
 
     }
+
+
+    private void loadSelectedState(int position){
+        SavedObj selectedState = (SavedObj)list.getItemAtPosition(position);
+        Intent i = new Intent();
+        State newState = (State)selectedState.getStateObj();
+        i.putExtra("loadedState",newState);
+        setResult(Activity.RESULT_OK,i);
+        finish();
+
+    }
+
 }

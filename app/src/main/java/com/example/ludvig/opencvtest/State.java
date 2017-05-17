@@ -20,4 +20,6 @@ public class State implements Serializable{     //TODO byt till Parcelable om de
     public State(){
 
     }
+
+
 }

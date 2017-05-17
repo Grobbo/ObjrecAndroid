@@ -1,6 +1,8 @@
 package com.example.ludvig.opencvtest;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.graphics.Path;
@@ -50,6 +52,8 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
     Mat circleMat;
     State state;
 
+    ComputerVisionLayout CVL;
+
     RadioButton contoursBtn;
     RadioButton circleBtn;
     RadioButton noneBtn;
@@ -65,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
 
         state = new State();
         setContentView(R.layout.activity_main);
-        ComputerVisionLayout CVL = new ComputerVisionLayout(state);
+        CVL = new ComputerVisionLayout(state);
         CVL.GUI_init(this);
 
         vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
@@ -153,5 +157,14 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
     @Override
     public void onCameraViewStopped() {
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 0 && resultCode == Activity.RESULT_OK){
+            this.state = (State)data.getSerializableExtra("loadedState");
+            CVL.setNewState(state);
+        }
     }
 }
