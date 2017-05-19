@@ -50,7 +50,9 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
     private Mat resultMat;
     Mat hierarchy;
     Mat circleMat;
+    Mat kernel;
     State state;
+    long timestamp;
 
     ComputerVisionLayout CVL;
 
@@ -78,6 +80,7 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
         circleBtn = (RadioButton) findViewById(R.id.radiocircle);
         noneBtn = (RadioButton) findViewById(R.id.radionone);
         onBtn = (RadioButton) findViewById(R.id.VibOn);
+        kernel = Imgproc.getStructuringElement(Imgproc.MORPH_RECT, new Size(6,6));
     }
 
     private void OpenCVInit(){
@@ -116,9 +119,15 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
         //Imgproc.blur(imgMat,hsvMat,new Size(7,7));  //TODO Ha kvar?
         Imgproc.cvtColor(imgMat,hsvMat, Imgproc.COLOR_RGB2HSV);   //RGB -> HSV
 
+        Imgproc.medianBlur(hsvMat,hsvMat,3);
         //...
         Core.inRange(hsvMat, new Scalar(state.low_hValue, state.low_sValue, state.low_vValue), new Scalar(state.high_hValue, state.high_sValue, state.high_vValue), resultMat);
-        Imgproc.blur(resultMat,resultMat,new Size(7,7));
+        //Imgproc.blur(resultMat,resultMat,new Size(7,7));
+
+
+
+
+
 
         if(contoursBtn.isChecked()){
             Imgproc.medianBlur(resultMat, resultMat, 3);
@@ -129,11 +138,19 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
 
         if(circleBtn.isChecked()){
             if(state.isRBG) {         //TODO rita ut alltid istället?
-                Imgproc.HoughCircles(resultMat,circleMat,Imgproc.CV_HOUGH_GRADIENT,2,resultMat.rows()/4);  //4:e arg = resolution. 1 ger samma res, 2 ger halva res osv..
+
+                //Imgproc.morphologyEx(resultMat,resultMat,Imgproc.MORPH_CLOSE,kernel);  //Cant handle computation...
+
+                Imgproc.HoughCircles(resultMat,circleMat,Imgproc.CV_HOUGH_GRADIENT,2,resultMat.rows()/2,80,20,15,200);  //4:e arg = resolution. 1 ger samma res, 2 ger halva res osv..
+
 
                 if(!circleMat.empty()) {
                     if(onBtn.isChecked()){
-                        vibrator.vibrate(100);
+                        if((System.currentTimeMillis() - timestamp) > 400){
+                            timestamp = System.currentTimeMillis();
+                            vibrator.vibrate(200);
+                        }
+
                     }
                     for (int i = 0; i < circleMat.cols(); i++) {
                         double[] circle = circleMat.get(0, i);       //[0,1,2] = [x,y,r]
