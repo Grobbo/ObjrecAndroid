@@ -2,4 +2,20 @@
     <string name="app_name">ComputerVision</string>
     <string name="save_button">Save Current Settings</string>
     <string name="file_name">File Name:</string>
+    <string name="change_to_hsv">CHANGE TO HSV</string>
+    <string name="Saveloadsettings">Save/Load Settings</string>
+    <string name="hub">Hue Upper bound</string>
+    <string name="zero">0</string>
+    <string name="sub">Saturation upper bound</string>
+    <string name="vub">Value upper bound</string>
+    <string name="hlb">Hue lower bound</string>
+    <string name="slb">Saturation lower bound</string>
+    <string name="vlb">Value lower bound</string>
+    <string name="Contours">Contours</string>
+    <string name="Circle">Circle</string>
+    <string name="None">None</string>
+    <string name="Vibrator">Vibrator</string>
+    <string name="on">ON</string>
+    <string name="off">OFF</string>
+    <string name="hidemenu">Hide Menu</string>
 </resources>

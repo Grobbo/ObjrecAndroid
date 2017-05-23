@@ -34,6 +34,8 @@ public class ComputerVisionLayout {
     private SeekBar satLow_bar;
     private SeekBar valHigh_bar;
     private SeekBar valLow_bar;
+    private JavaCameraView mCameraView;
+    private MainActivity main;
 
 
     public ComputerVisionLayout(State state) {
@@ -42,6 +44,7 @@ public class ComputerVisionLayout {
 
     void GUI_init(final MainActivity main){
 
+        this.main = main;
         LinearLayout cammeraFrame = (LinearLayout) main.findViewById(R.id.Cameraframe);
         //LinearLayout menuLayout = (LinearLayout) main.findViewById(R.id.MenuLayout);
         final LinearLayout hide_menu = (LinearLayout) main.findViewById(R.id.hide_menu);
@@ -70,7 +73,7 @@ public class ComputerVisionLayout {
         final Button rbghsvButton = (Button) main.findViewById(R.id.rbghsv_button);
         final Button saveImportButton = (Button) main.findViewById(R.id.saveImport_button);
 
-        JavaCameraView mCameraView = new JavaCameraView(main, CameraBridgeViewBase.CAMERA_ID_ANY);
+        mCameraView = new JavaCameraView(main, CameraBridgeViewBase.CAMERA_ID_ANY);
         mCameraView.enableFpsMeter();
         mCameraView.enableView();
         mCameraView.setMaxFrameSize(800,640);
@@ -78,7 +81,6 @@ public class ComputerVisionLayout {
         cammeraFrame.addView(mCameraView,new LinearLayoutCompat.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT));
 
         mCameraView.setCvCameraViewListener(main);
-
 
         //lISTENERS.....
         hueHigh_bar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -268,6 +270,8 @@ public class ComputerVisionLayout {
         });
     }
     public void setNewState(State state){
+        state.isRBG = this.state.isRBG;
+        state.isMenu = this.state.isMenu;
         this.state = state;
         hueHigh_bar.setProgress(state.high_hValue);
         satHigh_bar.setProgress(state.high_sValue);
@@ -275,6 +279,14 @@ public class ComputerVisionLayout {
         hueLow_bar.setProgress(state.low_hValue);
         satLow_bar.setProgress(state.low_sValue);
         valLow_bar.setProgress(state.low_vValue);
+    }
 
+    public void enableView(){
+        mCameraView.enableView();
+
+    }
+
+    public void disableView(){
+        mCameraView.disableView();
     }
 }

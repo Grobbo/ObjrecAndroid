@@ -17,6 +17,7 @@ public class State implements Serializable{     //TODO byt till Parcelable om de
     boolean isMenu = true;
     boolean isRBG = true;
 
+
     public State(){
 
     }

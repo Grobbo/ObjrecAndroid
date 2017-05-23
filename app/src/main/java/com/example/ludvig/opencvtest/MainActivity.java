@@ -53,6 +53,8 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
     Mat kernel;
     State state;
     long timestamp;
+    Scalar colorLine;
+    Scalar textColor;
 
     ComputerVisionLayout CVL;
 
@@ -69,6 +71,9 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
         setWindowMode();
         OpenCVInit();
 
+        colorLine = new Scalar(0,255,0);
+        textColor = new Scalar(255,0,0);
+
         state = new State();
         setContentView(R.layout.activity_main);
         CVL = new ComputerVisionLayout(state);
@@ -82,6 +87,20 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
         onBtn = (RadioButton) findViewById(R.id.VibOn);
         kernel = Imgproc.getStructuringElement(Imgproc.MORPH_RECT, new Size(6,6));
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        CVL.disableView();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        CVL.enableView();
+    }
+
+
 
     private void OpenCVInit(){
         if (!OpenCVLoader.initDebug()) {
@@ -116,13 +135,16 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
         //Do calculations on frame...
         imgMat = frame.rgba();
 
-        //Imgproc.blur(imgMat,hsvMat,new Size(7,7));  //TODO Ha kvar?
+        //Imgproc.blur(imgMat,hsvMat,new Size(7,7));
         Imgproc.cvtColor(imgMat,hsvMat, Imgproc.COLOR_RGB2HSV);   //RGB -> HSV
 
-        Imgproc.medianBlur(hsvMat,hsvMat,3);
+
         //...
+        Imgproc.medianBlur(hsvMat,hsvMat,5);
         Core.inRange(hsvMat, new Scalar(state.low_hValue, state.low_sValue, state.low_vValue), new Scalar(state.high_hValue, state.high_sValue, state.high_vValue), resultMat);
+        //Core.inRange(hsvMat, new Scalar(39, 37, 44), new Scalar(180, 224, 208), resultMat);
         //Imgproc.blur(resultMat,resultMat,new Size(7,7));
+        Imgproc.medianBlur(resultMat,resultMat,5);
 
 
 
@@ -130,19 +152,17 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
 
 
         if(contoursBtn.isChecked()){
-            Imgproc.medianBlur(resultMat, resultMat, 3);
             List<MatOfPoint> contours = new ArrayList<MatOfPoint>();
             Imgproc.findContours(resultMat,contours,hierarchy,Imgproc.RETR_LIST,Imgproc.CHAIN_APPROX_SIMPLE);
             Imgproc.drawContours(imgMat,contours,-1, new Scalar(0,255,0),3);
         }
 
         if(circleBtn.isChecked()){
-            if(state.isRBG) {         //TODO rita ut alltid istället?
+            if(state.isRBG) { 
 
                 //Imgproc.morphologyEx(resultMat,resultMat,Imgproc.MORPH_CLOSE,kernel);  //Cant handle computation...
 
-                Imgproc.HoughCircles(resultMat,circleMat,Imgproc.CV_HOUGH_GRADIENT,2,resultMat.rows()/2,80,20,15,200);  //4:e arg = resolution. 1 ger samma res, 2 ger halva res osv..
-
+                Imgproc.HoughCircles(resultMat,circleMat,Imgproc.CV_HOUGH_GRADIENT,1.9,resultMat.rows()/2,180,55,30,150);  //4:e arg = resolution. 1 ger samma res, 2 ger halva res osv.. 5:e distance between circles
 
                 if(!circleMat.empty()) {
                     if(onBtn.isChecked()){
@@ -154,10 +174,9 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
                     }
                     for (int i = 0; i < circleMat.cols(); i++) {
                         double[] circle = circleMat.get(0, i);       //[0,1,2] = [x,y,r]
-
                         Point center = new Point(circle[0], circle[1]);
-
-                        Imgproc.circle(imgMat, center, (int) circle[2], new Scalar(0, 255, 0), 3);
+                        Imgproc.circle(imgMat, center, (int) circle[2], colorLine, 3);
+                        //Imgproc.putText(imgMat,circleMat.size().toString(),center,Core.FONT_HERSHEY_COMPLEX,1,textColor);
                     }
                 }
             }
